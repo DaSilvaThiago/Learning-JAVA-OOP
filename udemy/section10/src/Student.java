@@ -2,11 +2,25 @@ public class Student {
     private String name;
     private double firstNote;
     private double secondNote;
+    private String email;
+
+    public Student(String name, String email){
+        this.name = name;
+        this.email = email;
+    }
 
     public Student(String name, double firstNote, double secondNote){
         this.name = name;
         this.firstNote = firstNote;
         this.secondNote = secondNote;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
