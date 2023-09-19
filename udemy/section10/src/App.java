@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -5,41 +7,48 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
-        Student[] StudentRent = new Student[10];
-        int n = 0;
-        do {
-            System.out.println("How many students will being to rent a room? (1-10)");
-            n = sc.nextInt();            
+        
+        System.out.print("How many employees will be registered? ");
+        int willBe = sc.nextInt();
+        System.out.println();
+        List<Integer> id = new ArrayList<>();
+        List<String> name = new ArrayList<>();
+        List<Double> salary = new ArrayList<>();
+        for (int i = 0; i < willBe; i++) {
+            System.out.println("Employee #"+(i+1));
+            System.out.print("Id: ");
+            id.add(i, sc.nextInt());
             sc.nextLine();
-        } while (n < 1 || n > 10);
-        for (int i = 1; i <= n; i++) {
-            System.out.println("Rent #"+i);
-            System.out.print("What's your name: ");
-            String name = sc.nextLine();
-            System.out.print("What's your email address: ");
-            String email = sc.nextLine();
-            System.out.print("Available rooms: ");
-            for (int j = 0; j < StudentRent.length; j++) {             
-                if (StudentRent[j] == null) {
-                    System.out.print(" | "+ j +" | ");
-                }
-            }  
+            System.out.print("Name: ");
+            name.add(i,sc.nextLine());
+            System.out.print("Salary: ");
+            salary.add(i,sc.nextDouble());
+            sc.nextLine();
             System.out.println();
-            System.out.print("room: ");
-            int ChosedRoom = sc.nextInt();
-            sc.nextLine();
-            StudentRent[ChosedRoom] = new Student(name, email);
         }
-        System.out.println("Busy rooms: ");
-        for (int i = 0; i < StudentRent.length; i++) {
-            if (StudentRent[i] != null) {
-                System.out.println(i+": "+StudentRent[i].getName()+", "+StudentRent[i].getEmail());
+        System.out.print("Enter the employee id that will have salary increase: ");
+        int idEmployee = sc.nextInt();
+        sc.nextLine();
+        if(idEmployee >= 1 && idEmployee <= id.size()){
+            System.out.print("Enter the percentage: ");
+            double percent = sc.nextDouble();
+            sc.nextLine();
+            System.out.println();
+            int position = id.indexOf(idEmployee);
+            double value = salary.get(position);
+            salary.set(position, ((value/100)*percent)+value);
+            System.out.println("List of employees:");
+            for (int i = 0; i < willBe; i++) {
+                System.out.println(id.get(i) + ", " + name.get(i) + ", " + salary.get(i));
+            }
+        }else{
+            System.out.println("This id does not exist!");
+            System.out.println();
+            System.out.println("List of employees:");
+            for (int i = 0; i < willBe; i++) {
+                System.out.println(id.get(i) + ", " + name.get(i) + ", " + salary.get(i));
             }
         }
-             
-
-
         sc.close();
     }
 }
-//after i can try to make an program that list free rooms and according to user choose an room, this room disappear to the list
