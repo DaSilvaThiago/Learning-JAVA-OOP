@@ -3,15 +3,8 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        Person p1 = new Person("Thiago", 22);
-        System.out.println(p1.getName());
+        Person p1 = new Person("Thiago", "Solteiro", "12.332.156-2", "123.621.189-32", "14/10/2000");
         System.out.println(p1.getAge());
-        System.out.print("new name: ");
-        String newName = sc.nextLine();
-        p1.setName(newName);
-        System.out.print("new age: ");
-        int newAge = sc.nextInt();
-        p1.setAge(newAge);
         System.out.println(p1.toString());
         sc.close();
     }
