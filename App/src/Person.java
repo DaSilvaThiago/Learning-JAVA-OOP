@@ -8,13 +8,15 @@ public class Person {
     private String rg;
     private String cpf;
     private LocalDate birthday;
+    private String work; 
 
-    public Person(String name, String civilState, String rg, String cpf, String birthday) {
+    public Person(String name, String civilState, String rg, String cpf, String birthday, String work) {
         this.name = name;
         this.civilState = civilState;
         this.rg = rg;
         this.cpf = cpf;
         setBirthday(birthday);
+        this.work = work;
     }
 
     public int getAge(){
@@ -63,13 +65,24 @@ public class Person {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.birthday = LocalDate.parse(birthday, formatter);
     }
+    
+    public String getWork() {
+        return work;
+    }
 
+    public void setWork(String work) {
+        this.cpf = work;
+    }
+    
+    
     @Override
     public String toString() {
         return "name: " + name + "\r\n" +
+                "age: " + this.getAge() + "\r\n" +
                 "civilState: " + civilState + "\r\n" +
                 "rg: " + rg + "\r\n" +
+                "work: " + work + "\r\n" +
                 "cpf: " + cpf + "\r\n" +
-                "birthday: " + birthday;
+                "was born: " + birthday;
     }
 }
