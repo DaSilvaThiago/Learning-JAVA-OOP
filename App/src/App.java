@@ -3,19 +3,17 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        //instantiate new person
-        Person p1 = new Person("Thiago", "Solteiro", "12.332.156-2", "123.621.189-32", "14/10/2000", "Developer");
-        Person p2 = new Person("Jose", "Casado", "22.342.766-3", "543.345.122-22", "12/07/1986", "Developer");
-        //instantiate an schedule pass a person by parameter
-        Schedule p = new Schedule(p1);
-        p.setContacts(p2);
-        //find the person by the name
-            //System.out.println(p.getContactByName("Thiago"));
-        //find the person by the work
-            //System.out.println(p.getWork("Developer"));
-        //return all the list
-            System.out.println(p.toString());
+
+        Person person = new Person("Thiago", "Solteiro", "12.332.156-2", "123.621.189-32", "14/10/2000", "Mecanico");
+        Employe employe = new Employe(1245.23, "Senor", "ti", "Jose", "Casado", "123.234.644-6", "456.745-56",
+                "21/03/1989", "Developer");
+        Student student = new Student("TSI", 12345, "Maria", "Solteira", "09.655.654-1", "234.875.634-54", "19/06/2002",
+                "Engenheiro");
+        Schedule mySchedule = new Schedule(person);
+        mySchedule.setEmployes(employe);
+        mySchedule.setStudents(student);
+
+        System.out.println(mySchedule.toString());
         sc.close();
     }
 }
-    
