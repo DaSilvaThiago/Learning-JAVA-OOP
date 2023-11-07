@@ -8,20 +8,20 @@ public class Person {
     private String rg;
     private String cpf;
     private LocalDate birthday;
-    private String work; 
+    private String work;
 
     public Person(String name, String civilState, String rg, String cpf, String birthday, String work) {
-        this.name = name;
+        setName(name);
         this.civilState = civilState;
         this.rg = rg;
-        this.cpf = cpf;
+        setCpf(cpf);
         setBirthday(birthday);
         this.work = work;
     }
 
-    public int getAge(){
-        LocalDate currenDate = LocalDate.now();
-        Period period = Period.between(getBirthday(), currenDate);
+    public int getAge() {
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(getBirthday(), currentDate);
         return period.getYears();
     }
 
@@ -30,7 +30,11 @@ public class Person {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");
+        }
     }
 
     public String getCivilState() {
@@ -54,7 +58,11 @@ public class Person {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        if (cpf != null && cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")) {
+            this.cpf = cpf;
+        } else {
+            throw new IllegalArgumentException("CPF inválido.");
+        }
     }
 
     public LocalDate getBirthday() {
@@ -65,16 +73,15 @@ public class Person {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.birthday = LocalDate.parse(birthday, formatter);
     }
-    
+
     public String getWork() {
         return work;
     }
 
     public void setWork(String work) {
-        this.cpf = work;
+        this.work = work;
     }
-    
-    
+
     @Override
     public String toString() {
         return "name: " + name + "\r\n" +

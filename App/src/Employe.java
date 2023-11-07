@@ -1,11 +1,12 @@
-class Employe extends Person {
+public class Employe extends Person {
     private double salary;
     private String position;
     private String department;
+    private double bonus;
 
     Employe(double salary, String position, String department, String name, String civilState, String rg, String cpf, String birthday, String work) {
         super(name, civilState, rg, cpf, birthday, work);
-        this.salary = salary;
+        setSalary(salary);
         this.position = position;
         this.department = department;
     }
@@ -15,7 +16,11 @@ class Employe extends Person {
     }
 
     public void setSalary(double salary) {
-        this.salary = salary;
+        if (salary >= 0) {
+            this.salary = salary;
+        } else {
+            throw new IllegalArgumentException("Salário não pode ser negativo.");
+        }
     }
 
     public String getRole() {
@@ -34,6 +39,26 @@ class Employe extends Person {
         this.department = department;
     }
 
+    public void aumentoSalario(double percentualAumento) {
+        if (percentualAumento >= 0) {
+            this.salary += (this.salary * (percentualAumento / 100));
+        } else {
+            throw new IllegalArgumentException("Percentual de aumento inválido.");
+        }
+    }
+
+    public void adicionarBonus(double valor) {
+        if (valor >= 0) {
+            this.bonus += valor;
+        } else {
+            throw new IllegalArgumentException("Valor de bônus inválido.");
+        }
+    }
+
+    public void aplicarBonus() {
+        this.salary += bonus;
+        bonus = 0;
+    }
 
     @Override
     public String toString() {

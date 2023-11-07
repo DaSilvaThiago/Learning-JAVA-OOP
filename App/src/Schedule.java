@@ -1,23 +1,10 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author thiago.dsilva10
- */
 public class Schedule {
     private List<Person> contacts = new ArrayList<>();
     private List<Employe> employes = new ArrayList<>();
     private List<Student> students = new ArrayList<>();
-    private List<Person> foundPerson = new ArrayList<>();
-    private List<Employe> foundEmploye = new ArrayList<>();
-    private List<Student> foundStudent = new ArrayList<>();
 
     public Schedule(Person person) {
         this.contacts.add(person);
@@ -43,27 +30,49 @@ public class Schedule {
         return this.students;
     }
 
+    public List<Student> getStudentsInLastYear() {
+        List<Student> lastYearStudents = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getEnrollment() == 5) {
+                lastYearStudents.add(student);
+            }
+        }
+        return lastYearStudents;
+    }
+
+    public double calcularMediaIdade() {
+        double somaIdades = 0;
+        for (Person contact : contacts) {
+            somaIdades += contact.getAge();
+        }
+        return somaIdades / contacts.size();
+    }
+
     public String getContactByName(String name) {
+        List<Person> foundPerson = new ArrayList<>();
+        List<Employe> foundEmploye = new ArrayList<>();
+        List<Student> foundStudent = new ArrayList<>();
+
         for (Person person : contacts) {
             if (person.getName().equals(name.trim())) {
-                this.foundPerson.add(person);
+                foundPerson.add(person);
             }
         }
         for (Employe employe : employes) {
             if (employe.getName().equals(name)) {
-                this.foundEmploye.add(employe);
+                foundEmploye.add(employe);
             }
         }
         for (Student student : students) {
             if (student.getName().equals(name)) {
-                this.foundStudent.add(student);
+                foundStudent.add(student);
             }
         }
-        if (foundPerson != null) {
+        if (!foundPerson.isEmpty()) {
             return foundPerson.toString();
-        } else if (foundEmploye != null) {
+        } else if (!foundEmploye.isEmpty()) {
             return foundEmploye.toString();
-        } else if (foundStudent != null) {
+        } else if (!foundStudent.isEmpty()) {
             return foundStudent.toString();
         } else {
             return "Person or Employe not found!";
@@ -71,12 +80,13 @@ public class Schedule {
     }
 
     public String getEmployeByDepartment(String department) {
+        List<Employe> foundEmploye = new ArrayList<>();
         for (Employe employe : employes) {
             if (employe.getDepartment().equals(department.trim())) {
-                this.foundEmploye.add(employe);
+                foundEmploye.add(employe);
             }
         }
-        if (foundEmploye != null) {
+        if (!foundEmploye.isEmpty()) {
             return foundEmploye.toString();
         } else {
             return "Department not found!";
